@@ -6,7 +6,7 @@ import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer style={{ background: "#355872", color: "#9CD5FF" }}>
+    <footer style={{ background: "#0b1521", color: "#ffffff" }}>
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
@@ -15,58 +15,58 @@ const Footer = () => {
           <div className="flex items-center gap-2 mb-4">
             <div
               className="w-9 h-9 rounded-lg flex items-center justify-center text-xl"
-              style={{ background: "#7AAACE", color: "#355872" }}
+              style={{ background: "#1999f5", color: "#ffffff" }}
             >
               💡
             </div>
-            <span className="text-xl font-semibold" style={{ color: "#9CD5FF" }}>IdeaVault</span>
+            <span className="text-xl font-semibold" style={{ color: "#1999f5" }}>IdeaVault</span>
           </div>
-          <p className="text-sm leading-relaxed" style={{ color: "#7AAACE" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#94a3b8" }}>
             The platform where startup ideas get discovered, validated, and built — together.
           </p>
         </div>
 
         {/* Platform Links */}
         <div>
-          <h3 className="font-semibold text-base mb-4" style={{ color: "#9CD5FF" }}>Platform</h3>
-          <ul className="space-y-2 text-sm" style={{ color: "#7AAACE" }}>
+          <h3 className="font-semibold text-base mb-4" style={{ color: "#ffffff" }}>Platform</h3>
+          <ul className="space-y-2 text-sm">
             <li>
-              <Link href="/ideas" className="transition-colors hover:opacity-90"
-                style={{ color: "#7AAACE" }}
-                onMouseEnter={e => e.target.style.color = "#9CD5FF"}
-                onMouseLeave={e => e.target.style.color = "#7AAACE"}>
+              <Link href="/ideas" className="transition-colors duration-200"
+                style={{ color: "#94a3b8" }}
+                onMouseEnter={e => e.target.style.color = "#1999f5"}
+                onMouseLeave={e => e.target.style.color = "#94a3b8"}>
                 All Ideas
               </Link>
             </li>
             <li>
-              <Link href="/ideas?category=AI" className="transition-colors"
-                style={{ color: "#7AAACE" }}
-                onMouseEnter={e => e.target.style.color = "#9CD5FF"}
-                onMouseLeave={e => e.target.style.color = "#7AAACE"}>
+              <Link href="/ideas?category=AI" className="transition-colors duration-200"
+                style={{ color: "#94a3b8" }}
+                onMouseEnter={e => e.target.style.color = "#1999f5"}
+                onMouseLeave={e => e.target.style.color = "#94a3b8"}>
                 AI & Tech
               </Link>
             </li>
             <li>
-              <Link href="/ideas?category=Health" className="transition-colors"
-                style={{ color: "#7AAACE" }}
-                onMouseEnter={e => e.target.style.color = "#9CD5FF"}
-                onMouseLeave={e => e.target.style.color = "#7AAACE"}>
+              <Link href="/ideas?category=Health" className="transition-colors duration-200"
+                style={{ color: "#94a3b8" }}
+                onMouseEnter={e => e.target.style.color = "#1999f5"}
+                onMouseLeave={e => e.target.style.color = "#94a3b8"}>
                 Health
               </Link>
             </li>
             <li>
-              <Link href="/ideas?category=Education" className="transition-colors"
-                style={{ color: "#7AAACE" }}
-                onMouseEnter={e => e.target.style.color = "#9CD5FF"}
-                onMouseLeave={e => e.target.style.color = "#7AAACE"}>
+              <Link href="/ideas?category=Education" className="transition-colors duration-200"
+                style={{ color: "#94a3b8" }}
+                onMouseEnter={e => e.target.style.color = "#1999f5"}
+                onMouseLeave={e => e.target.style.color = "#94a3b8"}>
                 Education
               </Link>
             </li>
             <li>
-              <Link href="/add-idea" className="transition-colors"
-                style={{ color: "#7AAACE" }}
-                onMouseEnter={e => e.target.style.color = "#9CD5FF"}
-                onMouseLeave={e => e.target.style.color = "#7AAACE"}>
+              <Link href="/add-idea" className="transition-colors duration-200"
+                style={{ color: "#94a3b8" }}
+                onMouseEnter={e => e.target.style.color = "#1999f5"}
+                onMouseLeave={e => e.target.style.color = "#94a3b8"}>
                 Submit Idea
               </Link>
             </li>
@@ -75,18 +75,18 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div>
-          <h3 className="font-semibold text-base mb-4" style={{ color: "#9CD5FF" }}>Contact</h3>
-          <ul className="space-y-3 text-sm" style={{ color: "#7AAACE" }}>
+          <h3 className="font-semibold text-base mb-4" style={{ color: "#ffffff" }}>Contact</h3>
+          <ul className="space-y-3 text-sm" style={{ color: "#94a3b8" }}>
             <li className="flex items-center gap-2">
-              <MdEmail className="text-lg shrink-0" style={{ color: "#9CD5FF" }} />
+              <MdEmail className="text-lg shrink-0" style={{ color: "#1999f5" }} />
               <span>hello@ideavault.io</span>
             </li>
             <li className="flex items-center gap-2">
-              <MdPhone className="text-lg shrink-0" style={{ color: "#9CD5FF" }} />
+              <MdPhone className="text-lg shrink-0" style={{ color: "#1999f5" }} />
               <span>+880 1700-000000</span>
             </li>
             <li className="flex items-start gap-2">
-              <MdLocationOn className="text-lg shrink-0 mt-0.5" style={{ color: "#9CD5FF" }} />
+              <MdLocationOn className="text-lg shrink-0 mt-0.5" style={{ color: "#1999f5" }} />
               <span>Dhaka, Bangladesh</span>
             </li>
           </ul>
@@ -94,51 +94,51 @@ const Footer = () => {
 
         {/* Social + Newsletter */}
         <div>
-          <h3 className="font-semibold text-base mb-4" style={{ color: "#9CD5FF" }}>Follow Us</h3>
+          <h3 className="font-semibold text-base mb-4" style={{ color: "#ffffff" }}>Follow Us</h3>
           <div className="flex gap-3 mb-6">
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-              style={{ background: "#4a7a9b", color: "#9CD5FF" }}
-              onMouseEnter={e => { e.currentTarget.style.background = "#7AAACE"; e.currentTarget.style.color = "#355872"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "#4a7a9b"; e.currentTarget.style.color = "#9CD5FF"; }}
+              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
+              style={{ background: "#1e293b", color: "#1999f5" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#1999f5"; e.currentTarget.style.color = "#ffffff"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "#1e293b"; e.currentTarget.style.color = "#1999f5"; }}
               aria-label="X Twitter">
               <FaXTwitter />
             </a>
             <a href="https://github.com" target="_blank" rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-              style={{ background: "#4a7a9b", color: "#9CD5FF" }}
-              onMouseEnter={e => { e.currentTarget.style.background = "#7AAACE"; e.currentTarget.style.color = "#355872"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "#4a7a9b"; e.currentTarget.style.color = "#9CD5FF"; }}
+              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
+              style={{ background: "#1e293b", color: "#1999f5" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#1999f5"; e.currentTarget.style.color = "#ffffff"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "#1e293b"; e.currentTarget.style.color = "#1999f5"; }}
               aria-label="GitHub">
               <FaGithub />
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-              style={{ background: "#4a7a9b", color: "#9CD5FF" }}
-              onMouseEnter={e => { e.currentTarget.style.background = "#7AAACE"; e.currentTarget.style.color = "#355872"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "#4a7a9b"; e.currentTarget.style.color = "#9CD5FF"; }}
+              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
+              style={{ background: "#1e293b", color: "#1999f5" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#1999f5"; e.currentTarget.style.color = "#ffffff"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "#1e293b"; e.currentTarget.style.color = "#1999f5"; }}
               aria-label="LinkedIn">
               <FaLinkedin />
             </a>
           </div>
 
-          <h3 className="font-semibold text-base mb-3" style={{ color: "#9CD5FF" }}>Newsletter</h3>
+          <h3 className="font-semibold text-base mb-3" style={{ color: "#ffffff" }}>Newsletter</h3>
           <div className="flex gap-2">
             <input
               type="email"
               placeholder="your@email.com"
-              className="input input-bordered input-sm flex-1 text-sm"
+              className="input input-bordered input-sm flex-1 text-sm outline-none focus:border-[#1999f5]"
               style={{
-                background: "#2a4a62",
-                border: "1px solid #7AAACE",
-                color: "#9CD5FF",
+                background: "#122031",
+                border: "1px solid #1e293b",
+                color: "#ffffff",
               }}
             />
             <button
-              className="btn btn-sm"
-              style={{ background: "#7AAACE", color: "#355872", fontWeight: 600, border: "none" }}
-              onMouseEnter={e => { e.currentTarget.style.background = "#9CD5FF"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "#7AAACE"; }}
+              className="btn btn-sm border-none"
+              style={{ background: "#1999f5", color: "#ffffff", fontWeight: 600 }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#1180cf"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "#1999f5"; }}
             >
               Subscribe
             </button>
@@ -147,30 +147,30 @@ const Footer = () => {
       </div>
 
       {/* Divider */}
-      <div style={{ borderTop: "1px solid #4a7a9b" }} />
+      <div style={{ borderTop: "1px solid #1e293b" }} />
 
       {/* Copyright */}
       <div
         className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm"
-        style={{ color: "#7AAACE" }}
+        style={{ color: "#94a3b8" }}
       >
         <span>© {new Date().getFullYear()} IdeaVault. All rights reserved.</span>
         <div className="flex gap-4">
           <Link
             href="/privacy"
-            style={{ color: "#7AAACE" }}
-            onMouseEnter={e => e.target.style.color = "#9CD5FF"}
-            onMouseLeave={e => e.target.style.color = "#7AAACE"}
-            className="transition-colors"
+            style={{ color: "#94a3b8" }}
+            onMouseEnter={e => e.target.style.color = "#1999f5"}
+            onMouseLeave={e => e.target.style.color = "#94a3b8"}
+            className="transition-colors duration-200"
           >
             Privacy Policy
           </Link>
           <Link
             href="/terms"
-            style={{ color: "#7AAACE" }}
-            onMouseEnter={e => e.target.style.color = "#9CD5FF"}
-            onMouseLeave={e => e.target.style.color = "#7AAACE"}
-            className="transition-colors"
+            style={{ color: "#94a3b8" }}
+            onMouseEnter={e => e.target.style.color = "#1999f5"}
+            onMouseLeave={e => e.target.style.color = "#94a3b8"}
+            className="transition-colors duration-200"
           >
             Terms of Use
           </Link>
