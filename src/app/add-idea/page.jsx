@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { useRouter } from "next/navigation"; //  ঠিক করা হয়েছে
+import { useRouter } from "next/navigation"; //  ঠিক করা হয়েছে
 import toast, { Toaster } from "react-hot-toast";
 
 const CATEGORIES = ["Tech", "Health", "AI", "Education", "Finance", "Environment", "Social Impact", "E-Commerce", "Entertainment", "Other"];
@@ -10,6 +10,7 @@ const INIT = {
   shortDesc: "",
   detailedDesc: "",
   category: "",
+  imageUrl: "", // এই যে এখানে imageUrl স্টেট যোগ করা হয়েছে
   targetAudience: "",
   problemStatement: "",
   proposedSolution: "",
@@ -54,7 +55,7 @@ const ta = (err) => ({ ...inp(err), resize: "vertical", lineHeight: 1.6 });
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useAuth();
-  const router = useRouter(); //  ঠিক করা হয়েছে
+  const router = useRouter(); //  ঠিক করা হয়েছে
 
   if (!isAuthenticated) return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, background: "#f0f9ff" }}>
@@ -62,7 +63,7 @@ function PrivateRoute({ children }) {
       <h2 style={{ margin: 0, fontSize: 20, color: "#1a1a2e" }}>Sign in required</h2>
       <p style={{ margin: 0, color: "#64748b", fontSize: 14 }}>You must be logged in to submit an idea.</p>
       <button
-        onClick={() => router.push("/login")} //  ঠিক করা হয়েছে
+        onClick={() => router.push("/login")} //  ঠিক করা হয়েছে
         style={{ marginTop: 8, padding: "10px 26px", borderRadius: 10, background: "#1999f5", color: "#fff", border: "none", fontWeight: 600, fontSize: 14, cursor: "pointer" }}
       >
         Go to Login
@@ -74,7 +75,7 @@ function PrivateRoute({ children }) {
 
 function AddIdeaForm() {
   const { user } = useAuth();
-  const router = useRouter(); //  ঠিক করা হয়েছে
+  const router = useRouter();
   const [form, setForm] = useState(INIT);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -91,6 +92,7 @@ function AddIdeaForm() {
     else if (form.shortDesc.length > 160) e.shortDesc       = "Max 160 characters.";
     if (!form.detailedDesc.trim())      e.detailedDesc      = "Detailed description is required.";
     if (!form.category)                 e.category          = "Please select a category.";
+    if (!form.imageUrl.trim())          e.imageUrl          = "Image URL is required."; // ভ্যালিডেশন যোগ করা হয়েছে
     if (!form.targetAudience.trim())    e.targetAudience    = "Target audience is required.";
     if (!form.problemStatement.trim())  e.problemStatement  = "Problem statement is required.";
     if (!form.proposedSolution.trim())  e.proposedSolution  = "Proposed solution is required.";
@@ -121,7 +123,7 @@ function AddIdeaForm() {
         iconTheme: { primary: "#fff", secondary: "#1999f5" },
         duration: 4000,
       });
-      setTimeout(() => router.push("/ideas"), 1500); //  ঠিক করা হয়েছে
+      setTimeout(() => router.push("/ideas"), 1500); 
     } catch {
       toast.error("Submission failed. Please try again.");
     } finally {
@@ -187,6 +189,11 @@ function AddIdeaForm() {
               <option value="" disabled>Select a category</option>
               {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
+          </Field>
+
+          {/* ঠিক ক্যাটাগরির নিচে Image URL ফিল্ডটি যোগ করা হয়েছে */}
+          <Field label="Image URL" required error={errors.imageUrl} hint="Provide a valid image link.">
+            <input type="text" placeholder="e.g. https://example.com/image.jpg" value={form.imageUrl} onChange={set("imageUrl")} style={inp(errors.imageUrl)} />
           </Field>
         </div>
 

@@ -121,7 +121,7 @@ export default function HomePage() {
         </p>
         <Link
           href="/ideas"
-          className="inline-block bg-[#9CD5FF] text-[#1a3a4a] font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-[#1999f5] transition-colors duration-200"
+          className="inline-block bg-[#9CD5FF] text-[#1a3a4a] font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-[] transition-colors duration-200"
         >
           Explore Ideas →
         </Link>
