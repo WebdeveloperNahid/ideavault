@@ -191,7 +191,7 @@ function AddIdeaForm() {
             </select>
           </Field>
 
-          {/* ঠিক ক্যাটাগরির নিচে Image URL ফিল্ডটি যোগ করা হয়েছে */}
+          {/*  Image URL  */}
           <Field label="Image URL" required error={errors.imageUrl} hint="Provide a valid image link.">
             <input type="text" placeholder="e.g. https://example.com/image.jpg" value={form.imageUrl} onChange={set("imageUrl")} style={inp(errors.imageUrl)} />
           </Field>
