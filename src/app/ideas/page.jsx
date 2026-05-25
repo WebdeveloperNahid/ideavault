@@ -1,12 +1,7 @@
 import IdeaCard from "@/component/IdeaCard";
+import { fetchIdeas } from "@/lib/ideasapi/data";
 
-const fetchIdeas = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/ideas`, {
-    cache: "no-store",
-  });
-  const data = await res.json();
-  return data || [];
-};
+
 
 export default async function IdeasPage() {
   const ideas = await fetchIdeas();

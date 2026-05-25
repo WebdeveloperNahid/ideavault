@@ -1,16 +1,17 @@
 // app/home/page.jsx
-"use client";
 
 
 import BannerSection from "@/component/BannerSection";
 import TrendingIdeas from "@/component/TrendingIdeas";
+import { fetchHomeData } from "@/lib/ideasapi/data";
 
 
-export default function HomePage() {
+export default async function HomePage() {
+  const triendingsData = await fetchHomeData();
   return (
     <main>
       <BannerSection />
-      <TrendingIdeas />
+      <TrendingIdeas triendingsData={triendingsData} />
     </main>
   );
 }

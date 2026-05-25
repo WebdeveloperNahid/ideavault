@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
+
 const categoryColors = {
   Health:      { bg: "bg-emerald-50",  text: "text-emerald-700",  dot: "bg-emerald-400" },
   Education:   { bg: "bg-amber-50",    text: "text-amber-700",    dot: "bg-amber-400"   },
@@ -116,6 +117,7 @@ export default function IdeaCard({ idea }) {
           </button>
         </Link>
       </div>
+
     </div>
   );
 }
