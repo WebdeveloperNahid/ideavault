@@ -1,6 +1,5 @@
 import IdeaCard from "@/component/IdeaCard";
 
-
 const fetchIdeas = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/ideas`, {
     cache: "no-store",
@@ -16,15 +15,8 @@ export default async function IdeasPage() {
     <>
       <div>Filter section</div>
 
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-        gap: "24px",
-        padding: "24px",
-        maxWidth: "1200px",
-        margin: "0 auto",
-      }}>
-        {ideas?.map((idea) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-6">
+        {ideas.map((idea) => (
           <IdeaCard key={idea._id} idea={idea} />
         ))}
       </div>

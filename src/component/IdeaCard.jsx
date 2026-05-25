@@ -4,14 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 
 const categoryColors = {
-  Health:      { bg: "#e8f7f0", text: "#0d6e45", dot: "#1ab87a" },
-  Education:   { bg: "#fff4e0", text: "#8a5500", dot: "#f59e0b" },
-  Tech:        { bg: "#e8f0fe", text: "#1a3a8a", dot: "#4a7af5" },
-  AI:          { bg: "#f0e8fe", text: "#5a1a8a", dot: "#9b5cf6" },
-  Finance:     { bg: "#e8fef0", text: "#0a5a2a", dot: "#22c55e" },
-  Environment: { bg: "#e8fef8", text: "#0a5a4a", dot: "#14b8a6" },
-  Social:      { bg: "#fee8f0", text: "#8a0a3a", dot: "#ec4899" },
-  Other:       { bg: "#f4f4f4", text: "#444",    dot: "#888"    },
+  Health:      { bg: "bg-emerald-50",  text: "text-emerald-700",  dot: "bg-emerald-400" },
+  Education:   { bg: "bg-amber-50",    text: "text-amber-700",    dot: "bg-amber-400"   },
+  Tech:        { bg: "bg-blue-50",     text: "text-blue-700",     dot: "bg-blue-400"    },
+  AI:          { bg: "bg-violet-50",   text: "text-violet-700",   dot: "bg-violet-400"  },
+  Finance:     { bg: "bg-green-50",    text: "text-green-700",    dot: "bg-green-400"   },
+  Environment: { bg: "bg-teal-50",     text: "text-teal-700",     dot: "bg-teal-400"    },
+  Social:      { bg: "bg-pink-50",     text: "text-pink-700",     dot: "bg-pink-400"    },
+  Other:       { bg: "bg-gray-100",    text: "text-gray-500",     dot: "bg-gray-400"    },
 };
 
 export default function IdeaCard({ idea }) {
@@ -22,120 +22,96 @@ export default function IdeaCard({ idea }) {
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        background: "#fff",
-        borderRadius: "18px",
-        overflow: "hidden",
-        border: hovered ? "1.5px solid #1999f5" : "1.5px solid #e8edf2",
-        boxShadow: hovered
-          ? "0 16px 48px rgba(25,153,245,0.13), 0 2px 8px rgba(0,0,0,0.06)"
-          : "0 2px 12px rgba(0,0,0,0.06)",
-        transform: hovered ? "translateY(-6px) scale(1.012)" : "translateY(0) scale(1)",
-        transition: "all 0.32s cubic-bezier(0.34,1.56,0.64,1)",
-        display: "flex",
-        flexDirection: "column",
-        cursor: "pointer",
-      }}
+      className={`
+        group relative bg-white rounded-2xl overflow-hidden flex flex-col h-full cursor-pointer
+        border transition-all duration-300 ease-out
+        ${hovered
+          ? "border-sky-400 shadow-[0_16px_48px_rgba(25,153,245,0.15)] -translate-y-1.5 scale-[1.012]"
+          : "border-slate-200 shadow-md translate-y-0 scale-100"
+        }
+      `}
     >
-      <div style={{ position: "relative", height: "200px", overflow: "hidden" }}>
+      {/* Image */}
+      <div className="relative h-48 overflow-hidden flex-shrink-0">
         <img
           src={idea.imageURL}
           alt={idea.ideaTitle}
-          style={{
-            width: "100%", height: "100%", objectFit: "cover",
-            transform: hovered ? "scale(1.07)" : "scale(1)",
-            transition: "transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94)",
-          }}
+          className={`w-full h-full object-cover transition-transform duration-500 ease-out ${hovered ? "scale-110" : "scale-100"}`}
         />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: hovered
-            ? "linear-gradient(180deg,rgba(25,153,245,0.08) 0%,rgba(0,0,0,0.35) 100%)"
-            : "linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.25) 100%)",
-          transition: "background 0.3s ease",
-        }} />
-        <span style={{
-          position: "absolute", top: "14px", left: "14px",
-          background: cat.bg, color: cat.text,
-          fontSize: "11.5px", fontWeight: 600,
-          padding: "4px 11px", borderRadius: "99px",
-          display: "flex", alignItems: "center", gap: "5px",
-        }}>
-          <span style={{
-            width: "6px", height: "6px", borderRadius: "50%",
-            background: cat.dot, display: "inline-block",
-          }} />
+        <div
+          className={`absolute inset-0 transition-all duration-300 ${
+            hovered
+              ? "bg-gradient-to-b from-sky-400/10 to-black/40"
+              : "bg-gradient-to-b from-transparent via-transparent to-black/25"
+          }`}
+        />
+        <span
+          className={`absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold ${cat.bg} ${cat.text}`}
+        >
+          <span className={`w-1.5 h-1.5 rounded-full ${cat.dot}`} />
           {idea.category}
         </span>
       </div>
 
-      <div style={{
-        padding: "20px 22px 22px", flex: 1,
-        display: "flex", flexDirection: "column", gap: "10px",
-      }}>
-        <h3 style={{
-          fontSize: "17px", fontWeight: 700, margin: 0,
-          lineHeight: 1.3, letterSpacing: "-0.01em",
-          color: hovered ? "#1999f5" : "#0f1923",
-          transition: "color 0.2s",
-        }}>
+      {/* Body */}
+      <div className="flex flex-col flex-1 gap-2.5 p-5">
+        <h3
+          className={`text-[17px] font-bold leading-snug tracking-tight transition-colors duration-200 ${
+            hovered ? "text-sky-500" : "text-slate-900"
+          }`}
+        >
           {idea.ideaTitle}
         </h3>
 
-        <p style={{
-          fontSize: "13.5px", color: "#6b7a8d", margin: 0,
-          lineHeight: 1.6, display: "-webkit-box",
-          WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
-        }}>
+        <p className="text-[13px] text-slate-500 leading-relaxed line-clamp-2">
           {idea.shortDescription}
         </p>
 
-        <div style={{
-          background: "#f7faff", border: "1px solid #e2ecf8",
-          borderRadius: "10px", padding: "10px 13px",
-        }}>
-          <p style={{
-            fontSize: "11.5px", fontWeight: 600, color: "#1999f5",
-            margin: "0 0 3px", textTransform: "uppercase", letterSpacing: "0.06em",
-          }}>Problem</p>
-          <p style={{
-            fontSize: "12.5px", color: "#4a5568", margin: 0, lineHeight: 1.5,
-            display: "-webkit-box", WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical", overflow: "hidden",
-          }}>
+        <div className="bg-sky-50 border border-sky-100 rounded-xl px-3.5 py-2.5">
+          <p className="text-[10.5px] font-semibold text-sky-500 uppercase tracking-widest mb-0.5">
+            Problem
+          </p>
+          <p className="text-[12.5px] text-slate-600 leading-relaxed line-clamp-2">
             {idea.problemStatement}
           </p>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-            stroke="#1999f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        <div className="flex items-center gap-2">
+          <svg
+            className="w-4 h-4 text-sky-400 flex-shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
-          <span style={{ fontSize: "12.5px", color: "#6b7a8d" }}>
-            {idea.targetAudience}
-          </span>
+          <span className="text-[12.5px] text-slate-500 line-clamp-1">{idea.targetAudience}</span>
         </div>
 
-        <Link href={`/ideas/${idea._id}`} style={{ marginTop: "auto", paddingTop: "14px", display: "block", textDecoration: "none" }}>
-          <button style={{
-            width: "100%", padding: "11px 0",
-            background: hovered ? "#1999f5" : "transparent",
-            color: hovered ? "#fff" : "#1999f5",
-            border: "1.5px solid #1999f5", borderRadius: "10px",
-            fontSize: "14px", fontWeight: 600, cursor: "pointer",
-            transition: "all 0.25s ease",
-            display: "flex", alignItems: "center", justifyContent: "center", gap: "7px",
-            fontFamily: "inherit",
-          }}>
+        <Link href={`/ideas/${idea._id}`} className="mt-auto pt-3 block">
+          <button
+            className={`
+              w-full py-2.5 rounded-xl text-sm font-semibold border border-sky-400
+              flex items-center justify-center gap-2 transition-all duration-200
+              ${hovered ? "bg-sky-400 text-white" : "bg-transparent text-sky-400"}
+            `}
+          >
             View Details
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2.5"
-              strokeLinecap="round" strokeLinejoin="round"
-              style={{ transform: hovered ? "translateX(3px)" : "translateX(0)", transition: "transform 0.25s ease" }}>
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+            <svg
+              className={`w-4 h-4 transition-transform duration-200 ${hovered ? "translate-x-1" : "translate-x-0"}`}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
         </Link>
