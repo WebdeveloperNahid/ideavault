@@ -1,3 +1,45 @@
 @import "tailwindcss";
-@plugin "daisyui";
-@import "@heroui/styles"; 
+
+/* 🎯 স্ট্যান্ডার্ড ডার্ক মোড (পুরো ওয়েবসাইটের জন্য) */
+:root[data-theme="synthwave"] body,
+:root[data-theme="synthwave"] nav,
+:root[data-theme="synthwave"] footer,
+:root[data-theme="synthwave"] main,
+:root[data-theme="synthwave"] form,
+:root[data-theme="synthwave"] .bg-white {
+  background-color: #202120 !important; /* রিচ ডার্ক ব্যাকগ্রাউন্ড */
+  color: #f8fafc !important; /* সাদা টেক্সট */
+}
+
+/* 🎯 ডার্ক মোডে ফর্মের ইনপুট, টেক্সটএরিয়া এবং সিলেক্ট বক্স ডার্ক করা */
+:root[data-theme="synthwave"] input,
+:root[data-theme="synthwave"] textarea,
+:root[data-theme="synthwave"] select {
+  background-color: #1e293b !important; /* হালকা ডার্ক (Slate-800) যেন ফর্মের ফিল্ডগুলো চেনা যায় */
+  color: #f8fafc !important; /* ইনপুটের ভেতরের লেখার কালার সাদা */
+  border-color: #334155 !important; /* বর্ডারের কালার হালকা ডার্ক */
+}
+
+/* 🎯 ডার্ক মোডে ইনপুটের প্লেসহোল্ডার (ঝাপসা লেখা) হালকা সাদা করা */
+:root[data-theme="synthwave"] input::placeholder,
+:root[data-theme="synthwave"] textarea::placeholder {
+  color: #94a3b8 !important; /* Slate-400 */
+}
+
+/* 🎯 ডার্ক মোডে কার্ডগুলোর ব্যাকগ্রাউন্ড একটু হালকা ডার্ক করা */
+:root[data-theme="synthwave"] .group.relative {
+  background-color: #1e293b !important; 
+  border-color: #334155 !important;
+}
+
+/* 🎯 স্ট্যান্ডার্ড লাইট মোড (ডিফল্ট) */
+:root[data-theme="light"] body,
+:root[data-theme="light"] nav,
+:root[data-theme="light"] footer,
+:root[data-theme="light"] main,
+:root[data-theme="light"] input,
+:root[data-theme="light"] textarea,
+:root[data-theme="light"] select {
+  background-color: #ffffff !important; 
+  color: #0f172a !important; 
+}
