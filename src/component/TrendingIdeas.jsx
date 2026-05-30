@@ -65,7 +65,7 @@ export default function TrendingIdeas({triendingsData}) {
   if(!triendingsData || !Array.isArray(triendingsData)) return null;
   return (
     <section className="px-6 py-12 max-w-6xl mx-auto">
-      <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-1">
+      <h2 className="text-2xl font-bold text-gray-800 mb-1">
         Trending Ideas
       </h2>
       <p className="text-gray-500 text-sm mb-8">

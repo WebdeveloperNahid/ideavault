@@ -4,8 +4,9 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import logo from "../../public/images/logo.png";
-import Link from "next/link";
+
 import ThemeToggler from "./ThemeToggler";
+import Link from "next/link";
 
 const navLinks = [
   { href: "/home", label: "Home" },
@@ -13,6 +14,8 @@ const navLinks = [
   { href: "/add-idea", label: "Add Idea" },
   { href: "/my-ideas", label: "My Ideas" },
   { href: "/my-interactions", label: "My Interactions" },
+  { href: "/login", lable: "Login" },
+  { href: "/registration", lable: "Registration" },
 ];
 
 const Navbar = () => {
@@ -22,13 +25,13 @@ const Navbar = () => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
 
-  // ✅ Robust active check
-  const isActive = (href) => pathname === href || pathname.startsWith(href + "/");
+  // Robust active check
+  const isActive = (href) =>
+    pathname === href || pathname.startsWith(href + "/");
 
   return (
     <nav className="bg-white text-[#1999f5]">
       <div className="flex items-center justify-between h-15 px-4">
-
         <div>
           <Image src={logo} height={90} width={90} alt="logo" />
         </div>
@@ -53,24 +56,56 @@ const Navbar = () => {
 
         {/* Desktop right */}
         <div className="hidden md:flex items-center gap-3">
-          <button className="font-semibold hover:underline cursor-pointer">Login</button>
-          <button className="font-semibold hover:underline cursor-pointer">LogOut</button>
+          <Link href="/login" className="font-semibold hover:underline cursor-pointer">
+            Login
+          </Link>
+          <Link href="/registration" className="font-semibold hover:underline cursor-pointer">
+            Registration
+          </Link>
           <ThemeToggler />
         </div>
 
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-3">
-          <button className="font-semibold text-sm hover:underline cursor-pointer">Login</button>
-          <button className="font-semibold text-sm hover:underline cursor-pointer">LogOut</button>
+          <Link href="/login" className="font-semibold text-sm hover:underline cursor-pointer">
+            Login
+          </Link>
+          <Link href="/registation" className="font-semibold text-sm hover:underline cursor-pointer"></Link>
           <ThemeToggler />
-          <button onClick={toggleMenu} aria-label="Toggle menu" className="text-[#1999f5] focus:outline-none">
+          <button
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+            className="text-[#1999f5] focus:outline-none"
+          >
             {menuOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-7 w-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-7 w-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             )}
           </button>
