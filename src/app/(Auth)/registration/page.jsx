@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/lib/auth-client";
 import { ArrowRight, Lock, Mail, User } from "lucide-react";
+import Image from "next/image";
 
 export default function Register() {
   const router = useRouter();
@@ -44,6 +45,23 @@ export default function Register() {
               <p className="text-slate-500 font-medium">
                 Create your account to start learning
               </p>
+            </div>
+            
+              {/* Google button */}
+            <div className="space-y-2">
+              <Button
+                variant="bordered"
+                className="w-full h-12 font-bold rounded-2xl border-slate-200 hover:bg-slate-50 transition-colors gap-3 flex justify-center items-center border-2 border-gray-300 "
+              >
+                <Image
+                  width={20}
+                  height={20}
+                  src="https://www.google.com/favicon.ico"
+                  className="w-5 h-5 "
+                  alt="Google"
+                />
+                Sign in with Google
+              </Button>
             </div>
 
             <form className="space-y-6" onSubmit={handleRegister}>

@@ -33,8 +33,8 @@
 }
 
 /* 🎯 স্ট্যান্ডার্ড লাইট মোড (ডিফল্ট) */
-:root[data-theme="light"] body,
-:root[data-theme="light"] nav,
+/* :root[data-theme="light"] body,
+
 :root[data-theme="light"] footer,
 :root[data-theme="light"] main,
 :root[data-theme="light"] input,
@@ -42,4 +42,4 @@
 :root[data-theme="light"] select {
   background-color: #ffffff !important; 
   color: #0f172a !important; 
-}
+} */
