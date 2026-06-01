@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { username } from "better-auth/plugins";
+import { jwt, username } from "better-auth/plugins";
 
 const client = new MongoClient(process.env.MONGODB_URI);
 const db = client.db("ideavault");
@@ -9,13 +9,18 @@ const db = client.db("ideavault");
 export const auth = betterAuth({
   database: mongodbAdapter(db, {
     // Optional: if you don't provide a client, database transactions won't be enabled.
-    client
+    client,
   }),
-  emailAndPassword: {    
-        enabled: true
+  emailAndPassword: {
+    enabled: true,
+  },
+  session: {
+    cookieCache: {
+      enabled: true,
+      strategy: "jwt",
+      maxAge: 5 * 24 * 60 * 60,
     },
-    plugins: [
-    username(),
-
-  ]
+  },
+  plugins: [jwt(),username()],
+  
 });

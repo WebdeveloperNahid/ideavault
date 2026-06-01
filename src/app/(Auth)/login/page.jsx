@@ -7,8 +7,9 @@ import Link from "next/link";
 import { Mail, Lock, ArrowRight } from "lucide-react";
 
 import Image from "next/image";
-import { signIn } from '@/lib/auth-client';
+import { authClient, signIn } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 
 export default function Login() {
   const handleLogin = async (e) => {
@@ -20,14 +21,24 @@ export default function Login() {
 
     const loginData = Object.fromEntries(formData.entries());
 
+    // for proxy to acces by login by any where
+
+    const params = new URLSearchParams(window.location.search);
+    const callbackURL = params.get("callbackURL") || "/home";
+
     const { data, error } = await signIn.email({
       ...loginData,
-      callbackURL: "/",
+      callbackURL: callbackURL,
     });
 
+    const { data: tokenData } = await authClient.token();
+    console.log(tokenData);
+
     if (error) {
-      toast.error("Registration failed");
+      toast.error("Login failed");
       return;
+    } else {
+      toast.success("Login Successfull!");
     }
     // router.push("/")
   };
