@@ -9,38 +9,40 @@ import { Mail, Lock, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { authClient, signIn } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
+import { useRouter } from "next/navigation";
+
 
 export default function Login() {
+  const router = useRouter();
   const handleLogin = async (e) => {
     e.preventDefault();
     // console.log(e.currentTarget);
 
     const formData = new FormData(e.currentTarget);
-    // console.log(formData);
-
     const loginData = Object.fromEntries(formData.entries());
 
     // for proxy to acces by login by any where
-
     const params = new URLSearchParams(window.location.search);
     const callbackURL = params.get("callbackURL") || "/home";
 
     const { data, error } = await signIn.email({
       ...loginData,
-      callbackURL: callbackURL,
+      // callbackURL: callbackURL,
+      dontNavigate: true,
     });
 
-    const { data: tokenData } = await authClient.token();
-    console.log(tokenData);
+    // const { data: tokenData } = await authClient.token();
+    // console.log(tokenData);
 
     if (error) {
       toast.error("Login failed");
       return;
-    } else {
-      toast.success("Login Successfull!");
     }
-    // router.push("/")
+    toast.success("Login Successfull!");
+
+    setTimeout(() => {
+      router.push(callbackURL);
+    }, 800);
   };
   return (
     <div className="min-h-[80vh] flex flex-col bg-slate-50">
@@ -129,6 +131,7 @@ export default function Login() {
                     className="pl-10 border-2 border-gray-300 py-3 w-full rounded-2xl"
                   />
                 </div>
+                <p className="text-[10px] text-gray-600 font-semibold">Must be at least 8 characters</p>
               </div>
               <div className="flex justify-end">
                 <Link

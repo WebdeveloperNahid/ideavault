@@ -27,7 +27,7 @@ export default function Register() {
     }
 
     toast.success("Registration successful");
-    router.push("/home");
+    router.push("/login");
   };
 
   return (
@@ -153,6 +153,7 @@ export default function Register() {
                     className="pl-10 border-2 border-gray-300 py-3 w-full rounded-2xl"
                   />
                 </div>
+                <p className="text-[10px] text-gray-600 font-semibold">Must be at least 8 characters</p>
               </div>
 
               <Button

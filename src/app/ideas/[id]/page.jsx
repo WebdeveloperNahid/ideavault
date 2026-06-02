@@ -1,12 +1,25 @@
-const fetchIdeasDetails = async (id) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/ideas/${id}`);
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+
+const fetchIdeasDetails = async (id, token) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/ideas/${id}`, {
+   headers: {
+     authorization: `Bearer ${token}`|| "",
+   }
+  });
+
+
   const data = await res.json();
   return data || {};
 };
 
 const IdeasDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const idea = await fetchIdeasDetails(id);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  console.log(token);
+  const idea = await fetchIdeasDetails(id, token);
 
   const {
     title,
@@ -24,7 +37,6 @@ const IdeasDetailsPage = async ({ params }) => {
   return (
     <div className="min-h-screen bg-slate-50 px-4 py-14">
       <article className="max-w-3xl mx-auto bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200">
-
         {/* ── Hero Image ── */}
         <div className="relative h-64 sm:h-[320px] overflow-hidden group">
           {imageURL && (
@@ -46,7 +58,6 @@ const IdeasDetailsPage = async ({ params }) => {
 
         {/* ── Body ── */}
         <div className="px-6 sm:px-10 py-8">
-
           {/* Title */}
           {displayTitle && (
             <h1 className="text-2xl sm:text-4xl font-bold text-slate-800 leading-snug tracking-tight mb-2">
@@ -78,7 +89,6 @@ const IdeasDetailsPage = async ({ params }) => {
 
           {/* Two-col info cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
             {/* Target Audience */}
             {targetAudience && (
               <div className="bg-sky-50 border border-sky-100 rounded-xl p-5">

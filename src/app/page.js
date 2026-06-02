@@ -1,9 +1,6 @@
-import Image from "next/image";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <div>
-      hello Home rot page
-    </div>
-  );
+export default function RootPage() {
+  // ইউজার মেইন ডোমেইনে ('/') আসলেই নেক্সট জেএস তাকে সুন্দরভাবে '/home' এ রিডাইরেক্ট করে দেবে
+  redirect("/home"); 
 }

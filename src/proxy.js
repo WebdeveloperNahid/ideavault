@@ -10,7 +10,7 @@ export async function proxy(request) {
   if (!session || !session?.user) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("callbackURL", request.nextUrl.pathname);
-    
+
     return NextResponse.redirect(loginUrl);
   }
 
