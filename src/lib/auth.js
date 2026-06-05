@@ -21,6 +21,5 @@ export const auth = betterAuth({
       maxAge: 5 * 24 * 60 * 60,
     },
   },
-  plugins: [jwt(),username()],
-  
+  plugins: [jwt(), username()],
 });

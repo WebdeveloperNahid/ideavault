@@ -1,6 +1,6 @@
 "use client";
 
-import { UpdateUserModal } from "@/component/EditModal";
+import { UpdateUserModal } from "@/components/EditModal";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,10 +35,14 @@ const Profile = () => {
           <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <FaShieldAlt className="w-8 h-8" />
           </div>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Access Denied</h2>
-          <p className="text-gray-500 mb-6">Please log in to view your profile dashboard.</p>
-          <Link 
-            href="/login" 
+          <h2 className="text-xl font-bold text-gray-800 mb-2">
+            Access Denied
+          </h2>
+          <p className="text-gray-500 mb-6">
+            Please log in to view your profile dashboard.
+          </p>
+          <Link
+            href="/login"
             className="inline-flex items-center justify-center w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl transition-colors shadow-lg shadow-blue-600/20"
           >
             Go to Login
@@ -52,8 +56,8 @@ const Profile = () => {
     <div className="min-h-[80vh] flex flex-col items-center justify-center p-4 bg-gray-50/50">
       {/* Back Button */}
       <div className="w-full max-w-md mb-4 text-left">
-        <Link 
-          href="/home" 
+        <Link
+          href="/home"
           className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors"
         >
           <FaArrowLeft className="w-3 h-3" /> Back to Home
@@ -65,13 +69,12 @@ const Profile = () => {
         <div className="h-32 bg-gradient-to-r from-blue-500 to-indigo-600 relative" />
 
         <div className="px-6 pb-8 relative flex flex-col items-center">
-          
           {/* Avatar */}
           <div className="relative w-28 h-28 -mt-14 mb-4 rounded-full ring-4 ring-white shadow-lg bg-gray-100 overflow-hidden">
             <Image
               src={user?.image || "/images/avatar.png"}
               alt={user?.name || "User Avatar"}
-              width={112} 
+              width={112}
               height={112}
               className="w-full h-full object-cover"
               priority
@@ -94,8 +97,12 @@ const Profile = () => {
                 <FaUser className="w-4 h-4" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Full Name</p>
-                <p className="text-sm font-semibold text-gray-700 truncate">{user?.name}</p>
+                <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">
+                  Full Name
+                </p>
+                <p className="text-sm font-semibold text-gray-700 truncate">
+                  {user?.name}
+                </p>
               </div>
             </div>
 
@@ -105,16 +112,19 @@ const Profile = () => {
                 <FaEnvelope className="w-4 h-4" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Email Address</p>
-                <p className="text-sm font-semibold text-gray-700 truncate">{user?.email}</p>
+                <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">
+                  Email Address
+                </p>
+                <p className="text-sm font-semibold text-gray-700 truncate">
+                  {user?.email}
+                </p>
               </div>
             </div>
-            
+
             {/* মডাল বাটনটি এখন পুরো কার্ড জুড়ে সুন্দরভাবে ফিট হবে */}
             <div className="pt-2">
               <UpdateUserModal />
             </div>
-
           </div>
         </div>
       </div>

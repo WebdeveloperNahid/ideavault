@@ -1,13 +1,13 @@
+import CommentSection from "@/Components/CommentSection";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 const fetchIdeasDetails = async (id, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/ideas/${id}`, {
-   headers: {
-     authorization: `Bearer ${token}`|| "",
-   }
+    headers: {
+      authorization: `Bearer ${token}` || "",
+    },
   });
-
 
   const data = await res.json();
   return data || {};
@@ -117,6 +117,7 @@ const IdeasDetailsPage = async ({ params }) => {
           </div>
         </div>
       </article>
+      <CommentSection ideaId={id}></CommentSection>
     </div>
   );
 };

@@ -1,7 +1,5 @@
-import IdeaCard from "@/component/IdeaCard";
+import IdeaCard from "@/Components/IdeaCard";
 import { fetchIdeas } from "@/lib/ideasapi/data";
-
-
 
 export default async function IdeasPage() {
   const ideas = await fetchIdeas();

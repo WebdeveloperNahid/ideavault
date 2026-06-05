@@ -1,16 +1,13 @@
 // app/home/page.jsx
 
-
-import BannerSection from "@/component/BannerSection";
-import Categories from "@/component/Categories";
-import TrendingIdeas from "@/component/TrendingIdeas";
-import WhyChoiceUs from "@/component/WhyChoiseUs";
-import WhyIdeaVault from "@/component/WhyIdeaVault";
-
+import BannerSection from "@/Components/BannerSection";
+import Categories from "@/Components/Categories";
+import TrendingIdeas from "@/Components/TrendingIdeas";
+import WhyChoiceUs from "@/Components/WhyChoiseUs";
+import WhyIdeaVault from "@/Components/WhyIdeaVault";
 
 import { fetchHomeData } from "@/lib/ideasapi/data";
 import Link from "next/link";
-
 
 export default async function HomePage() {
   const triendingsData = await fetchHomeData();
@@ -21,7 +18,9 @@ export default async function HomePage() {
 
       <div className="flex justify-center items-center ">
         <Link href={"/ideas"}>
-        <button className="bg-black text-white px-3 py-2 rounded-[5px] hover:bg-sky-500 cursor-pointer" >Explore More</button>
+          <button className="bg-black text-white px-3 py-2 rounded-[5px] hover:bg-sky-500 cursor-pointer">
+            Explore More
+          </button>
         </Link>
       </div>
 
@@ -30,9 +29,6 @@ export default async function HomePage() {
         <Categories></Categories>
         <WhyChoiceUs></WhyChoiceUs>
       </div>
-      
-      
-
     </main>
   );
 }
