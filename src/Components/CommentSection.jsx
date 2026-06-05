@@ -15,14 +15,18 @@ export default function CommentSection({ ideaId }) {
   const { data: session, isPending } = authClient.useSession();
   const currentUserId = session?.user?.id;
 
-  // Hydration fix — client mount হওয়ার আগে কিছু render করবে না
+  // Hydration fix — client mount houyar age kisu render korbe na
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const getToken = async () => {
-    const result = await authClient.jwt.getToken();
-    return result?.token;
+    const res = await fetch("/api/auth/token", {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await res.json();
+    return data?.token;
   };
 
   const fetchComments = async () => {
@@ -89,7 +93,6 @@ export default function CommentSection({ ideaId }) {
         Comments ({comments.length})
       </h2>
 
-      {/* mounted না হওয়া পর্যন্ত কিছু দেখাবে না — hydration fix */}
       {mounted && !isPending && (
         <>
           {session ? (
@@ -160,7 +163,11 @@ export default function CommentSection({ ideaId }) {
               )}
 
               <p className="text-xs text-slate-400 mt-2">
-                {new Date(comment.createdAt).toLocaleString()}
+                {comment.createdAt
+                  ? new Date(comment.createdAt).toLocaleDateString("en-GB") +
+                    ", " +
+                    new Date(comment.createdAt).toLocaleTimeString("en-GB")
+                  : ""}
               </p>
             </div>
 
