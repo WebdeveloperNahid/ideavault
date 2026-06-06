@@ -12,6 +12,7 @@ export default function CommentSection({ ideaId }) {
   const [editText, setEditText] = useState("");
   const [loading, setLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(null);
 
   const { data: session, isPending } = authClient.useSession();
   const currentUserId = session?.user?.id;
@@ -58,33 +59,38 @@ export default function CommentSection({ ideaId }) {
     const newComment = await res.json();
     if (newComment._id) {
       setComments((prev) => [newComment, ...prev]);
-      toast.success("Comment posted!"); 
+      toast.success("Comment posted!");
     } else {
-      toast.error("Failed to post comment."); 
+      toast.error("Failed to post comment.");
     }
     setText("");
     setLoading(false);
   };
 
-  const handleDelete = async (commentId) => {
+  const handleDeleteConfirm = async () => {
+    const commentId = deleteModal;
     const token = await getToken();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/comments/${commentId}`, {
-      method: "DELETE",
-      headers: { authorization: `Bearer ${token}` },
-    });
-     if (res.ok) {
-    setComments((prev) =>
-      prev.filter((c) => c._id?.toString() !== commentId)
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URI}/comments/${commentId}`,
+      {
+        method: "DELETE",
+        headers: { authorization: `Bearer ${token}` },
+      },
     );
-    toast.error("Comment deleted!"); 
-  } else {
-    toast.error("Failed to delete comment.");
-  }
+    if (res.ok) {
+      setComments((prev) =>
+        prev.filter((c) => c._id?.toString() !== commentId),
+      );
+      toast.error("Comment deleted!");
+    } else {
+      toast.error("Failed to delete comment.");
+    }
+    setDeleteModal(null);
   };
 
   const handleEditSave = async (commentId) => {
     const token = await getToken();
-    await fetch(`${process.env.NEXT_PUBLIC_API_URI}/comments/${commentId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/comments/${commentId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -92,12 +98,17 @@ export default function CommentSection({ ideaId }) {
       },
       body: JSON.stringify({ text: editText }),
     });
-    setComments((prev) =>
-      prev.map((c) =>
-        c._id?.toString() === commentId ? { ...c, text: editText } : c,
-      ),
-    );
-    setEditingId(null);
+    if (res.ok) {
+      setComments((prev) =>
+        prev.map((c) =>
+          c._id?.toString() === commentId ? { ...c, text: editText } : c,
+        ),
+      );
+      setEditingId(null);
+      toast.success("Comment updated!");
+    } else {
+      toast.error("Failed to update comment.");
+    }
   };
 
   return (
@@ -196,7 +207,7 @@ export default function CommentSection({ ideaId }) {
                   <FaEdit /> Edit
                 </button>
                 <button
-                  onClick={() => handleDelete(comment._id?.toString())}
+                  onClick={() => setDeleteModal(comment._id?.toString())}
                   className="flex items-center gap-1 text-xs text-red-500 bg-red-50 px-3 py-1.5 rounded-full font-semibold"
                 >
                   <FaTrash /> Delete
@@ -206,6 +217,39 @@ export default function CommentSection({ ideaId }) {
           </div>
         ))}
       </div>
+
+      {/* ✅ Delete Confirm Modal */}
+      {deleteModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-lg">
+                🗑️
+              </div>
+              <h3 className="text-base font-bold text-slate-800">
+                Delete comment permanently?
+              </h3>
+            </div>
+            <p className="text-sm text-slate-500 mb-6">
+              This action cannot be undone.
+            </p>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setDeleteModal(null)}
+                className="px-4 py-2 rounded-lg border border-slate-200 text-slate-500 text-sm font-medium hover:bg-slate-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2 rounded-lg bg-red-500 text-white text-sm font-semibold hover:bg-red-600"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
