@@ -4,6 +4,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 // import { authClient } from "@/lib/auth-client";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import DeleteModal from "./DeleteModal";
 
 export default function InteractionActions({ comment, onDelete, onEdit }) {
   const [editingId, setEditingId] = useState(null);
@@ -111,37 +112,11 @@ export default function InteractionActions({ comment, onDelete, onEdit }) {
         </div>
       )}
 
-      {deleteModal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-lg">
-                🗑️
-              </div>
-              <h3 className="text-base font-bold text-slate-800">
-                Delete comment permanently?
-              </h3>
-            </div>
-            <p className="text-sm text-slate-500 mb-6">
-              This action cannot be undone.
-            </p>
-            <div className="flex justify-end gap-3">
-              <button
-                onClick={() => setDeleteModal(false)}
-                className="px-4 py-2 rounded-lg border border-slate-200 text-slate-500 text-sm font-medium hover:bg-slate-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleDeleteConfirm}
-                className="px-4 py-2 rounded-lg bg-red-500 text-white text-sm font-semibold hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <DeleteModal
+        isOpen={deleteModal}
+        onClose={() => setDeleteModal(null)}
+        onConfirm={handleDeleteConfirm}
+      ></DeleteModal>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { authClient } from "@/lib/auth-client";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import toast from "react-hot-toast";
 
+
 export default function CommentSection({ ideaId }) {
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
@@ -81,7 +82,7 @@ export default function CommentSection({ ideaId }) {
       setComments((prev) =>
         prev.filter((c) => c._id?.toString() !== commentId),
       );
-      toast.error("Comment deleted!");
+      toast.success("Comment deleted!");
     } else {
       toast.error("Failed to delete comment.");
     }
