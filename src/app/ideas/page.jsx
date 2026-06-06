@@ -1,12 +1,30 @@
-import IdeaCard from "@/Components/IdeaCard";
-import { fetchIdeas } from "@/lib/ideasapi/data";
+"use client";
 
-export default async function IdeasPage() {
-  const ideas = await fetchIdeas();
+import { useEffect, useState } from "react";
+import SearchBar from "@/Components/SearchBar";
+import IdeaCard from "@/Components/IdeaCard";
+
+export default function IdeasPage() {
+  const [ideas, setIdeas] = useState([]);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
+
+  const fetchIdeas = async () => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URI}/ideas?search=${search}&category=${category}`
+    );
+
+    const data = await res.json();
+    setIdeas(data);
+  };
+
+  useEffect(() => {
+    fetchIdeas();
+  }, [search, category]);
 
   return (
     <>
-      <div>Filter section</div>
+      <SearchBar onSearch={setSearch} onCategoryChange={setCategory}></SearchBar>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-6">
         {ideas.map((idea) => (
