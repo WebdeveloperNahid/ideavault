@@ -21,7 +21,7 @@ export default function InteractionsList({ initialComments }) {
 
   return (
     <div>
-      <h2 className="text-slate-500 mb-8">Total comments:{comments.length} </h2>
+      <h2 className="text-sky-400 mb-8 font-bold ">Total comments: <span className="text-green-500 font-bold"> {comments.length}</span> </h2>
       {comments.length=== 0 && (
         <p className="text-slate-400 text-3xl"No Comments yet ></p>
       )}
