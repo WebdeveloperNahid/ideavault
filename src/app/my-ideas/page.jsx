@@ -2,8 +2,20 @@
 
 import { useEffect, useState } from "react";
 import IdeaCard from "@/Components/IdeaCard";
+import toast from "react-hot-toast";
 
-const CATEGORIES = ["Tech","Health","AI","Education","Finance","Environment","Social Impact","E-Commerce","Entertainment","Other"];
+const CATEGORIES = [
+  "Tech",
+  "Health",
+  "AI",
+  "Education",
+  "Finance",
+  "Environment",
+  "Social Impact",
+  "E-Commerce",
+  "Entertainment",
+  "Other",
+];
 
 export default function MyIdeasClient() {
   const [ideas, setIdeas] = useState([]);
@@ -53,16 +65,21 @@ export default function MyIdeasClient() {
       {
         method: "DELETE",
         headers: { authorization: `Bearer ${token}` },
-      }
+      },
     );
     if (res.ok) {
-      setIdeas((prev) => prev.filter((i) => i._id?.toString() !== ideaId?.toString()));
+      setIdeas((prev) =>
+        prev.filter((i) => i._id?.toString() !== ideaId?.toString()),
+      );
+      toast.success("Idea deleted Successfully!");
+    } else {
+      toast.error("Failed to delete idea.");
     }
   };
 
   // Edit modal খোলো
   const handleEdit = (ideaId) => {
-    const idea = ideas.find((i) => i._id === ideaId);
+    const idea = ideas.find((i) => i._id?.toString() === ideaId?.toString());
     if (!idea) return;
     setEditingIdea(ideaId);
     setForm({
@@ -79,8 +96,11 @@ export default function MyIdeasClient() {
 
   // Save edit
   const handleSave = async () => {
-    setSaving(true);
+  setSaving(true);
+
+  try {
     const token = await getToken();
+
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URI}/ideas/${editingIdea}`,
       {
@@ -89,33 +109,44 @@ export default function MyIdeasClient() {
           "Content-Type": "application/json",
           authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ideaTitle: form.title,
+          shortDescription: form.shortDesc,
+          detailedDescription: form.detailedDesc,
+          category: form.category,
+          imageURL: form.imageUrl,
+          targetAudience: form.targetAudience,
+          problemStatement: form.problemStatement,
+          proposedSolution: form.proposedSolution,
+        }),
       }
     );
-    if (res.ok) {
-      setIdeas((prev) =>
-        prev.map((i) =>
-          i._id === editingIdea
-            ? {
-                ...i,
-                ideaTitle: form.title,
-                shortDescription: form.shortDesc,
-                detailedDescription: form.detailedDesc,
-                category: form.category,
-                imageURL: form.imageUrl,
-                targetAudience: form.targetAudience,
-                problemStatement: form.problemStatement,
-                proposedSolution: form.proposedSolution,
-              }
-            : i
-        )
-      );
-      setEditingIdea(null);
-    }
-    setSaving(false);
-  };
 
-  const inputCls = "w-full px-3 py-2.5 rounded-lg border border-slate-200 text-sm text-slate-700 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100";
+    const data = await res.json();
+
+    console.log("PATCH STATUS:", res.status);
+    console.log("PATCH RESPONSE:", data);
+
+    if (!res.ok) {
+      toast.error(data?.message || "Update failed");
+      return;
+    }
+
+    toast.success("Idea updated successfully!");
+
+    setEditingIdea(null);
+
+    fetchMyIdeas();
+  } catch (error) {
+    console.error(error);
+    toast.error("Something went wrong");
+  } finally {
+    setSaving(false);
+  }
+};
+
+  const inputCls =
+    "w-full px-3 py-2.5 rounded-lg border border-slate-200 text-sm text-slate-700 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100";
 
   if (loading) {
     return (
@@ -155,85 +186,129 @@ export default function MyIdeasClient() {
               <button
                 onClick={() => setEditingIdea(null)}
                 className="text-slate-400 hover:text-slate-600 text-2xl leading-none"
-              >×</button>
+              >
+                ×
+              </button>
             </div>
 
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
-                <label className="text-sm font-semibold text-slate-700">Idea Title</label>
+                <label className="text-sm font-semibold text-slate-700">
+                  Idea Title
+                </label>
                 <input
                   value={form.title}
-                  onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, title: e.target.value }))
+                  }
                   className={inputCls}
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1">
-                  <label className="text-sm font-semibold text-slate-700">Category</label>
+                  <label className="text-sm font-semibold text-slate-700">
+                    Category
+                  </label>
                   <select
                     value={form.category}
-                    onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, category: e.target.value }))
+                    }
                     className={inputCls}
                   >
-                    {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                    {CATEGORIES.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-sm font-semibold text-slate-700">Image URL</label>
+                  <label className="text-sm font-semibold text-slate-700">
+                    Image URL
+                  </label>
                   <input
                     value={form.imageUrl}
-                    onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, imageUrl: e.target.value }))
+                    }
                     className={inputCls}
                   />
                 </div>
               </div>
 
               <div className="flex flex-col gap-1">
-                <label className="text-sm font-semibold text-slate-700">Short Description</label>
+                <label className="text-sm font-semibold text-slate-700">
+                  Short Description
+                </label>
                 <textarea
                   rows={2}
                   value={form.shortDesc}
-                  onChange={(e) => setForm((f) => ({ ...f, shortDesc: e.target.value }))}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, shortDesc: e.target.value }))
+                  }
                   className={inputCls + " resize-none"}
                 />
               </div>
 
               <div className="flex flex-col gap-1">
-                <label className="text-sm font-semibold text-slate-700">Detailed Description</label>
+                <label className="text-sm font-semibold text-slate-700">
+                  Detailed Description
+                </label>
                 <textarea
                   rows={3}
                   value={form.detailedDesc}
-                  onChange={(e) => setForm((f) => ({ ...f, detailedDesc: e.target.value }))}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, detailedDesc: e.target.value }))
+                  }
                   className={inputCls + " resize-none"}
                 />
               </div>
 
               <div className="flex flex-col gap-1">
-                <label className="text-sm font-semibold text-slate-700">Target Audience</label>
+                <label className="text-sm font-semibold text-slate-700">
+                  Target Audience
+                </label>
                 <input
                   value={form.targetAudience}
-                  onChange={(e) => setForm((f) => ({ ...f, targetAudience: e.target.value }))}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, targetAudience: e.target.value }))
+                  }
                   className={inputCls}
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1">
-                  <label className="text-sm font-semibold text-slate-700">Problem Statement</label>
+                  <label className="text-sm font-semibold text-slate-700">
+                    Problem Statement
+                  </label>
                   <textarea
                     rows={3}
                     value={form.problemStatement}
-                    onChange={(e) => setForm((f) => ({ ...f, problemStatement: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        problemStatement: e.target.value,
+                      }))
+                    }
                     className={inputCls + " resize-none"}
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-sm font-semibold text-slate-700">Proposed Solution</label>
+                  <label className="text-sm font-semibold text-slate-700">
+                    Proposed Solution
+                  </label>
                   <textarea
                     rows={3}
                     value={form.proposedSolution}
-                    onChange={(e) => setForm((f) => ({ ...f, proposedSolution: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        proposedSolution: e.target.value,
+                      }))
+                    }
                     className={inputCls + " resize-none"}
                   />
                 </div>
@@ -257,7 +332,9 @@ export default function MyIdeasClient() {
                     <span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                     Saving...
                   </>
-                ) : "Save Changes"}
+                ) : (
+                  "Save Changes"
+                )}
               </button>
             </div>
           </div>

@@ -30,6 +30,7 @@ const IdeasDetailsPage = async ({ params }) => {
     imageURL,
     targetAudience,
     problemStatement,
+    proposedSolution,
   } = idea;
 
   const displayTitle = ideaTitle || title;
@@ -89,19 +90,6 @@ const IdeasDetailsPage = async ({ params }) => {
 
           {/* Two-col info cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Target Audience */}
-            {targetAudience && (
-              <div className="bg-sky-50 border border-sky-100 rounded-xl p-5">
-                <span className="text-xl mb-2 block">🎯</span>
-                <p className="text-[10px] font-semibold tracking-widest uppercase text-sky-500 mb-1">
-                  Target Audience
-                </p>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {targetAudience}
-                </p>
-              </div>
-            )}
-
             {/* Problem Statement */}
             {problemStatement && (
               <div className="bg-slate-50 border border-slate-100 rounded-xl p-5">
@@ -111,6 +99,32 @@ const IdeasDetailsPage = async ({ params }) => {
                 </p>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   {problemStatement}
+                </p>
+              </div>
+            )}
+
+            {/* Proposed Solution */}
+            {proposedSolution && (
+              <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-5 ">
+                <span className="text-xl mb-2 block">💡</span>
+                <p className="text-[10px] font-semibold tracking-widest uppercase text-emerald-500 mb-1">
+                  Proposed Solution
+                </p>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {proposedSolution}
+                </p>
+              </div>
+            )}
+
+            {/* Target Audience */}
+            {targetAudience && (
+              <div className="bg-sky-50 border border-sky-100 rounded-xl p-5">
+                <span className="text-xl mb-2 block">🎯</span>
+                <p className="text-[10px] font-semibold tracking-widest uppercase text-sky-500 mb-1">
+                  Target Audience
+                </p>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {targetAudience}
                 </p>
               </div>
             )}
