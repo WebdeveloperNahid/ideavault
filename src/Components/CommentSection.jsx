@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 export default function CommentSection({ ideaId }) {
   const [comments, setComments] = useState([]);
@@ -55,18 +56,30 @@ export default function CommentSection({ ideaId }) {
       body: JSON.stringify({ ideaId, text }),
     });
     const newComment = await res.json();
-    setComments((prev) => [newComment, ...prev]);
+    if (newComment._id) {
+      setComments((prev) => [newComment, ...prev]);
+      toast.success("Comment posted!"); 
+    } else {
+      toast.error("Failed to post comment."); 
+    }
     setText("");
     setLoading(false);
   };
 
   const handleDelete = async (commentId) => {
     const token = await getToken();
-    await fetch(`${process.env.NEXT_PUBLIC_API_URI}/comments/${commentId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/comments/${commentId}`, {
       method: "DELETE",
       headers: { authorization: `Bearer ${token}` },
     });
-    setComments((prev) => prev.filter((c) => c._id?.toString() !== commentId));
+     if (res.ok) {
+    setComments((prev) =>
+      prev.filter((c) => c._id?.toString() !== commentId)
+    );
+    toast.error("Comment deleted!"); 
+  } else {
+    toast.error("Failed to delete comment.");
+  }
   };
 
   const handleEditSave = async (commentId) => {

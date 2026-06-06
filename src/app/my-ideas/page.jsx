@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import IdeaCard from "@/Components/IdeaCard";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const CATEGORIES = [
   "Tech",
@@ -158,6 +158,7 @@ export default function MyIdeasClient() {
 
   return (
     <div className="container mx-auto px-4 py-10">
+      <Toaster position = "top-right"/>
       <h1 className="text-2xl font-bold text-sky-500 mb-2">My Ideas</h1>
       <p className="text-slate-500 mb-8">Total: {ideas.length}</p>
 
