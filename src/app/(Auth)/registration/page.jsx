@@ -4,7 +4,7 @@ import { Button, Input } from "@heroui/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { authClient, signUp } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import { ArrowRight, Lock, Mail, User } from "lucide-react";
 import Image from "next/image";
 
@@ -31,7 +31,7 @@ export default function Register() {
   };
 
   const handleGoogleSignIn = async () => {
-    await authClient.signUp.social({
+    await authClient.signIn.social({
       provider: "google",
     });
   };
