@@ -11,7 +11,6 @@ import { authClient, signIn } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-
 export default function Login() {
   const router = useRouter();
   const handleLogin = async (e) => {
@@ -44,6 +43,12 @@ export default function Login() {
       router.push(callbackURL);
     }, 800);
   };
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
     <div className="min-h-[80vh] flex flex-col bg-slate-50">
       <div className="flex items-center justify-center p-4">
@@ -63,6 +68,7 @@ export default function Login() {
 
             <div className="space-y-4">
               <Button
+                onClick={handleGoogleSignIn}
                 variant="bordered"
                 className="w-full h-12 font-bold rounded-2xl border-slate-200 hover:bg-slate-50 transition-colors gap-3 flex justify-center items-center border-2 border-gray-300 "
               >
@@ -131,7 +137,9 @@ export default function Login() {
                     className="pl-10 border-2 border-gray-300 py-3 w-full rounded-2xl"
                   />
                 </div>
-                <p className="text-[10px] text-gray-600 font-semibold">Must be at least 8 characters</p>
+                <p className="text-[10px] text-gray-600 font-semibold">
+                  Must be at least 8 characters
+                </p>
               </div>
               <div className="flex justify-end">
                 <Link
