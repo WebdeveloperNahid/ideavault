@@ -1,6 +1,7 @@
 "use client";
 
-import { UpdateUserModal } from "@/components/EditModal";
+import { UpdateUserModal } from "@/Components/EditModal";
+// import { UpdateUserModal } from "@/components/EditModal";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
