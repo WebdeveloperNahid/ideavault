@@ -4,7 +4,7 @@ import { Button, Input } from "@heroui/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { signUp } from "@/lib/auth-client";
+import { authClient, signUp } from "@/lib/auth-client";
 import { ArrowRight, Lock, Mail, User } from "lucide-react";
 import Image from "next/image";
 
@@ -31,9 +31,10 @@ export default function Register() {
   };
 
   const handleGoogleSignIn = async () => {
-      await authClient.signIn.social({
-        provider: "google",
-      });
+    await authClient.signUp.social({
+      provider: "google",
+    });
+  };
 
   return (
     <div className="min-h-[80vh] flex flex-col bg-slate-50 py-12">
@@ -51,8 +52,8 @@ export default function Register() {
                 Create your account to start learning
               </p>
             </div>
-            
-              {/* Google button */}
+
+            {/* Google button */}
             <div className="space-y-2">
               <Button
               onClick={handleGoogleSignIn}
@@ -159,7 +160,9 @@ export default function Register() {
                     className="pl-10 border-2 border-gray-300 py-3 w-full rounded-2xl"
                   />
                 </div>
-                <p className="text-[10px] text-gray-600 font-semibold">Must be at least 8 characters</p>
+                <p className="text-[10px] text-gray-600 font-semibold">
+                  Must be at least 8 characters
+                </p>
               </div>
 
               <Button
