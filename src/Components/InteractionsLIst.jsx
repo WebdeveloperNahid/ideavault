@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import InteractionActions from "@/Components/InteractionActions";
+import InteractionActions from "./InteractionActions";
+// import InteractionActions from "@/Components/InteractionActions";
 
 export default function InteractionsList({ initialComments }) {
   const [comments, setComments] = useState(initialComments);
@@ -23,7 +24,7 @@ export default function InteractionsList({ initialComments }) {
     <div>
       <h2 className="text-sky-400 mb-8 font-bold ">Total comments: <span className="text-green-500 font-bold"> {comments.length}</span> </h2>
       {comments.length=== 0 && (
-        <p className="text-slate-400 text-3xl"No Comments yet ></p>
+        <p className="text-slate-400 text-3xl"> No Comments yet </p>
       )}
       <div className="space-y-4">
         {comments.map((comment, index) => (
