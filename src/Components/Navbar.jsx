@@ -22,7 +22,6 @@ const navLinks = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -74,8 +73,8 @@ const Navbar = () => {
           {isPending ? (
             <div className="w-10 h-10 rounded-full bg-slate-300 animate-pulse" />
           ) : session && session.user ? (
-            <div className="relative ">
-              <button className="flex items-center gap-3 p-1 rounded-full transition-colors">
+            <div className="relative group">
+              <button className="flex items-center gap-3 p-1 rounded-full hover:bg-muted transition-colors border border-transparent hover:border-border">
                 <Image
                   width={40}
                   height={40}
@@ -101,7 +100,6 @@ const Navbar = () => {
                 </div>
                 <Link
                   href="/profile"
-                  onClick={() => setDropdownOpen(false)}
                   className="px-4 py-2 text-sm flex items-center gap-3 transition-colors text-blue-500 font-bold hover:bg-blue-50"
                 >
                   <FaUser className="w-4 h-4" /> Profile
@@ -227,7 +225,7 @@ const Navbar = () => {
 
             {session && (
               <li>
-                <button  onClick={handleLogOut} className="block w-full text-left py-3 text-red-400 hover:text-red-300 font-semibold">
+                <button className="block w-full text-left py-3 text-red-400 hover:text-red-300 font-semibold">
                   Log Out
                 </button>
               </li>
