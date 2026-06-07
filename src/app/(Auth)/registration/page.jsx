@@ -33,6 +33,7 @@ export default function Register() {
   const handleGoogleSignIn = async () => {
     await authClient.signIn.social({
       provider: "google",
+      callbackURL: callbackURL,
     });
   };
 
@@ -56,7 +57,7 @@ export default function Register() {
             {/* Google button */}
             <div className="space-y-2">
               <Button
-              onClick={handleGoogleSignIn}
+                onClick={handleGoogleSignIn}
                 variant="bordered"
                 className="w-full h-12 font-bold rounded-2xl border-slate-200 hover:bg-slate-50 transition-colors gap-3 flex justify-center items-center border-2 border-gray-300 "
               >
