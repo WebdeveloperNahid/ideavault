@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import InteractionActions from "@/components/InteractionActions";
+import InteractionActions from "@/Components/InteractionActions";
 
 export default function InteractionsList({ initialComments }) {
   const [comments, setComments] = useState(initialComments);
