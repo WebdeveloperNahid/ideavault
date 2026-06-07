@@ -31,6 +31,8 @@ export default function Register() {
   };
 
   const handleGoogleSignIn = async () => {
+    const params = new URLSearchParams(window.location.search);
+    const callbackURL = params.get("callbackURL") || "/home";
     await authClient.signIn.social({
       provider: "google",
       callbackURL: callbackURL,
