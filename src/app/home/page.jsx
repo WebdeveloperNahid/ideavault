@@ -1,5 +1,7 @@
 // app/home/page.jsx
 
+export const dynamic = "force-dynamic";
+
 import BannerSection from "@/Components/BannerSection";
 import Categories from "@/Components/Categories";
 import TrendingIdeas from "@/Components/TrendingIdeas";
