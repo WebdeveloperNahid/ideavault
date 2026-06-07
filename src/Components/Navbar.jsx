@@ -22,6 +22,7 @@ const navLinks = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -37,6 +38,7 @@ const Navbar = () => {
     try {
       await signOut();
       closeMenu();
+      setDropdownOpen(false);
       router.push("/login");
     } catch (error) {
       console.error("Logout failed", error);
@@ -73,44 +75,51 @@ const Navbar = () => {
           {isPending ? (
             <div className="w-10 h-10 rounded-full bg-slate-300 animate-pulse" />
           ) : session && session.user ? (
-            <div className="relative group">
-              <button className="flex items-center gap-3 p-1 rounded-full hover:bg-muted transition-colors border border-transparent hover:border-border">
+            <div className="relative">
+              {/* Avatar Button — click করলে open/close */}
+              <button
+                onClick={() => setDropdownOpen((prev) => !prev)}
+                className="flex items-center gap-3 p-1 rounded-full transition-colors"
+              >
                 <Image
                   width={40}
                   height={40}
-                  src={session.user?.image || "/images/avatar.png"} // ইমেজ না থাকলে ব্যাকআপ ইমেজ
+                  src={session.user?.image || "/images/avatar.png"}
                   alt="avatar"
                   className="w-10 h-10 rounded-full object-cover ring-2 ring-blue-600/10"
                 />
                 <div className="text-left hidden lg:block">
-                  <p className="text-sm font-bold truncate max-w-25">
+                  <p className="text-sm font-bold truncate max-w-[100px]">
                     {session.user?.name}
                   </p>
                   <p className="text-[10px] text-slate-500">User</p>
                 </div>
               </button>
 
-              {/* Dropdown Menu */}
-              <div className="absolute right-0 top-12 w-56 bg-white border border-slate-200 rounded-2xl shadow-2xl hidden group-hover:flex flex-col py-2 z-50">
-                <div className="px-4 py-3 border-b border-slate-100">
-                  <p className="font-bold text-sm">Welcome back!</p>
-                  <p className="text-xs truncate text-slate-500">
-                    {session.user?.email}
-                  </p>
+              {/* Dropdown — click এ toggle */}
+              {dropdownOpen && (
+                <div className="absolute right-0 top-12 w-56 bg-white border border-slate-200 rounded-2xl shadow-2xl flex flex-col py-2 z-50">
+                  <div className="px-4 py-3 border-b border-slate-100">
+                    <p className="font-bold text-sm">Welcome back!</p>
+                    <p className="text-xs truncate text-slate-500">
+                      {session.user?.email}
+                    </p>
+                  </div>
+                  <Link
+                    href="/profile"
+                    onClick={() => setDropdownOpen(false)}
+                    className="px-4 py-2 text-sm flex items-center gap-3 transition-colors text-blue-500 font-bold hover:bg-blue-50"
+                  >
+                    <FaUser className="w-4 h-4" /> Profile
+                  </Link>
+                  <button
+                    onClick={handleLogOut}
+                    className="px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3 transition-colors text-left font-bold w-full"
+                  >
+                    <LogOut className="w-4 h-4" /> Log Out
+                  </button>
                 </div>
-                <Link
-                  href="/profile"
-                  className="px-4 py-2 text-sm flex items-center gap-3 transition-colors text-blue-500 font-bold hover:bg-blue-50"
-                >
-                  <FaUser className="w-4 h-4" /> Profile
-                </Link>
-                <button
-                  onClick={handleLogOut}
-                  className="px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3 transition-colors text-left font-bold w-full"
-                >
-                  <LogOut className="w-4 h-4" /> Log Out
-                </button>
-              </div>
+              )}
             </div>
           ) : (
             <>
@@ -169,34 +178,12 @@ const Navbar = () => {
             className="text-[#1999f5] focus:outline-none"
           >
             {menuOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-7 w-7"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-7 w-7"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
           </button>
@@ -225,7 +212,10 @@ const Navbar = () => {
 
             {session && (
               <li>
-                <button className="block w-full text-left py-3 text-red-400 hover:text-red-300 font-semibold">
+                <button
+                  onClick={handleLogOut}
+                  className="block w-full text-left py-3 text-red-400 hover:text-red-300 font-semibold"
+                >
                   Log Out
                 </button>
               </li>
