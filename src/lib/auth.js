@@ -13,6 +13,7 @@ export const auth = betterAuth({
   }),
   trustedOrigins: [
     "https://ideavault-nine-zeta.vercel.app",
+    "https://*.vercel.app",
     "http://localhost:3000",
   ],
 
