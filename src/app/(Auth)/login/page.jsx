@@ -45,8 +45,9 @@ export default function Login() {
   };
 
   const handleGoogleSignIn = async () => {
-     await authClient.signIn.social({
+    await authClient.signIn.social({
       provider: "google",
+      callbackURL: "https://ideavault-nine-zeta.vercel.app/home",
     });
   };
   return (
