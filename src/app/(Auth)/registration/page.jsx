@@ -4,7 +4,7 @@ import { Button, Input } from "@heroui/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
+import { authClient, signUp } from "@/lib/auth-client";
 import { ArrowRight, Lock, Mail, User } from "lucide-react";
 import Image from "next/image";
 
