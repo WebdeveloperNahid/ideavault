@@ -11,6 +11,11 @@ export const auth = betterAuth({
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client,
   }),
+  trustedOrigins: [
+    "https://ideavault-nine-zeta.vercel.app",
+    "http://localhost:3000",
+  ],
+
   emailAndPassword: {
     enabled: true,
   },
@@ -18,7 +23,6 @@ export const auth = betterAuth({
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-
     },
   },
   session: {
