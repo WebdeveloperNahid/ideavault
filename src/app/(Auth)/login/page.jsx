@@ -45,11 +45,8 @@ export default function Login() {
   };
 
   const handleGoogleSignIn = async () => {
-    const params = new URLSearchParams(window.location.search);
-    const callbackURL = params.get("callbackURL") || "/home";
-    await authClient.signIn.social({
+     await authClient.signIn.social({
       provider: "google",
-      callbackURL: callbackURL,
     });
   };
   return (
