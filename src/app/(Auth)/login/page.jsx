@@ -26,8 +26,8 @@ export default function Login() {
 
     const { data, error } = await signIn.email({
       ...loginData,
-      // callbackURL: callbackURL,
-      dontNavigate: true,
+      callbackURL: callbackURL,
+      // dontNavigate: true,
     });
 
     // const { data: tokenData } = await authClient.token();
@@ -39,15 +39,18 @@ export default function Login() {
     }
     toast.success("Login Successfull!");
 
-    setTimeout(() => {
-      router.push(callbackURL);
-    }, 800);
+    // setTimeout(() => {
+    //   router.push(callbackURL);
+    // }, 800);
   };
 
   const handleGoogleSignIn = async () => {
+    const params = new URLSearchParams(window.location.search);
+    const callbackURL = params.get("callbackURL") || "/home"; // ✅ dynamic
+
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "https://ideavault-nine-zeta.vercel.app/home",
+      callbackURL: `${process.env.NEXT_PUBLIC_BETTER_AUTH_URL}${callbackURL}`,
     });
   };
   return (

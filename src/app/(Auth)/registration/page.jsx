@@ -33,7 +33,7 @@ export default function Register() {
   const handleGoogleSignIn = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "https://ideavault-nine-zeta.vercel.app/home",
+     callbackURL: `${process.env.NEXT_PUBLIC_BETTER_AUTH_URL}/home`
     });
   };
 
