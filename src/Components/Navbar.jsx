@@ -178,12 +178,34 @@ const Navbar = () => {
             className="text-[#1999f5] focus:outline-none"
           >
             {menuOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-7 w-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-7 w-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             )}
           </button>
@@ -211,14 +233,29 @@ const Navbar = () => {
             ))}
 
             {session && (
-              <li>
-                <button
-                  onClick={handleLogOut}
-                  className="block w-full text-left py-3 text-red-400 hover:text-red-300 font-semibold"
-                >
-                  Log Out
-                </button>
-              </li>
+              <>
+                <li>
+                  <Link
+                    href="/profile"
+                    onClick={closeMenu}
+                    className={`block py-3 border-b border-[#9CD5FF]/20 duration-100 ${
+                      isActive("/profile")
+                        ? "text-white border-l-2 border-l-[#9CD5FF] pl-2"
+                        : "hover:text-white hover:pl-2"
+                    }`}
+                  >
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogOut}
+                    className="block w-full text-left py-3 text-red-400 hover:text-red-300 font-semibold"
+                  >
+                    Log Out
+                  </button>
+                </li>
+              </>
             )}
           </ul>
         </div>
