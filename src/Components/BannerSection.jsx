@@ -40,7 +40,7 @@ export default function BannerSection() {
 
   return (
     <section
-      className="relative text-white py-24 px-6 text-center bg-cover bg-center transition-all duration-1000 ease-in-out"
+      className="container mx-auto relative text-white py-24 px-6 text-center bg-cover bg-center transition-all duration-1000 ease-in-out"
       style={{
         backgroundImage: `linear-gradient(rgba(25, 46, 31, 0.4), rgba(25, 46, 31, 0.4)), url(${slides[current].image})`,
       }}

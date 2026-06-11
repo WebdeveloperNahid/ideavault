@@ -64,15 +64,15 @@ export default function TrendingIdeas({triendingsData}) {
   // const {title,category,description,likes,comments,date} = triendingsData;
   if(!triendingsData || !Array.isArray(triendingsData)) return null;
   return (
-    <section className="px-6 py-12 max-w-6xl mx-auto">
-      <h2 className="text-2xl font-bold text-gray-800 mb-1">
+    <section className="  container mx-auto ">
+      <h2 className=" text-2xl font-bold text-gray-800 mb-1">
         Trending Ideas
       </h2>
-      <p className="text-gray-500 text-sm mb-8">
+      <p className= " text-gray-500 text-sm mb-8">
         Most popular ideas this week
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {triendingsData?.map((idea) => (
           <IdeaCard key={idea._id} idea={idea} ></IdeaCard>
         ))}

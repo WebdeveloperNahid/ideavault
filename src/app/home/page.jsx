@@ -18,7 +18,7 @@ export default async function HomePage() {
       <BannerSection />
       <TrendingIdeas triendingsData={triendingsData} />
 
-      <div className="flex justify-center items-center ">
+      <div className="flex justify-center items-center py-5 ">
         <Link href={"/ideas"}>
           <button className="bg-black text-white px-3 py-2 rounded-[5px] hover:bg-sky-500 cursor-pointer">
             Explore More

@@ -18,7 +18,7 @@ const SearchBar = ({ onSearch, onCategoryChange }) => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 my-6 ">
+    <div className="container mx-auto   ">
       <div className="text-center pb-5 space-y-2">
       <h1 className="text-3xl font-bold text-[#3a3939ea]">Discover Ideas that Inspire You</h1>
       <p className="text-[#14141498]">Explore, filter, and find creative ideas shared by the community</p>

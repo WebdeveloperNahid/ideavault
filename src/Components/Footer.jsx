@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer style={{ background: "#0b1521", color: "#ffffff" }}>
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
         {/* Brand */}
         <div>

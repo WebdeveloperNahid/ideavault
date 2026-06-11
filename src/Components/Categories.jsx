@@ -59,7 +59,7 @@ export default function Categories() {
   return (
     // 💡 এখানে 'bg-slate-50/70' ব্যবহার করা হয়েছে, যা সেকশনটিকে আলাদা একটি হালকা শেড দেবে
     <section className="py-24 bg-slate-50/70 border-y border-slate-100">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="container mx-auto">
         
         {/* সেকশন হেডার */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">

@@ -47,13 +47,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-200 text-[#000000]">
-      <div className="flex items-center justify-between h-16 px-4">
+      <div className=" container mx-auto flex items-center justify-between h-16 px-4">
         <div>
           <Image src={logo} height={90} width={90} alt="logo" />
         </div>
 
         {/* Desktop nav links */}
-        <ul className="hidden md:flex items-center justify-center gap-4 font-semibold">
+        <ul className="  hidden md:flex  items-center justify-center gap-4 font-semibold">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link

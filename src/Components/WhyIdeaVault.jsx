@@ -38,7 +38,7 @@ export default function WhyIdeaVault() {
   return (
     // 💡 এখানে 'bg-blue-50/30' এবং হালকা বর্ডার ব্যবহার করা হয়েছে যা সেকশনটিকে মডার্ন ব্লক ভাইব দেবে
     <section className="py-24 bg-blue-50/30 border-b border-slate-100">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="container mx-auto">
         
         {/* সেকশন হেডার */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">

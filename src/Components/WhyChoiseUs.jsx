@@ -42,7 +42,7 @@ export default function WhyChoiceUs() {
   return (
     // 💡 পুরো সেকশনের ব্যাকগ্রাউন্ডে খুব হালকা একটি মডার্ন কালার শেড (গ্রেডিয়েন্ট) দেওয়া হয়েছে
     <section className="py-24 bg-gradient-to-tr from-slate-50 via-cyan-50/20 to-blue-50/40">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="container mx-auto">
         
         {/* সেকশন হেডার */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">

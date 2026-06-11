@@ -24,9 +24,9 @@ export default function IdeasPage() {
 
   return (
     <>
-      <SearchBar onSearch={setSearch} onCategoryChange={setCategory}></SearchBar>
+      <SearchBar  onSearch={setSearch} onCategoryChange={setCategory}></SearchBar>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-6">
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-6">
         {ideas.map((idea) => (
           <IdeaCard key={idea._id} idea={idea} />
         ))}
