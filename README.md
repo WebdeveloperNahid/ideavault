@@ -2,6 +2,9 @@
 
 **Live Site:** = https://ideavault-nine-zeta.vercel.app
 ---
+
+![Uploading image.png…]()
+
 ## About the Project
 
 IdeaVault is a full-stack web platform where users can share innovative startup ideas, explore ideas posted by others, and engage through comments and community discussions.
