@@ -3,7 +3,8 @@
 **Live Site:** = https://ideavault-nine-zeta.vercel.app
 ---
 
-![Uploading image.png…]()
+<img width="1889" height="992" alt="Screenshot 2026-07-09 195009" src="https://github.com/user-attachments/assets/80a2536e-f107-49fb-9e28-2d51412023c3" />
+
 
 ## About the Project
 
